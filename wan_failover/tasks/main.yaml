@@ -1,0 +1,19 @@
+- name: Copy wan-failover.sh to /usr/bin/wan-failover.sh
+  ansible.builtin.copy:
+    src: wan-failover.sh
+    dest: /usr/bin/wan-failover.sh
+    mode: '0755'
+  notify: Restart wan_failover
+
+- name: Copy wan_failover to init.d
+  ansible.builtin.copy:
+    src: wan_failover
+    dest: /etc/init.d/wan_failover
+    mode: '0755'
+  notify: Restart wan_failover
+
+- name: Ensure wan_failover is enabled/started
+  ansible.builtin.service:
+    name: wan_failover
+    enabled: true
+    state: started

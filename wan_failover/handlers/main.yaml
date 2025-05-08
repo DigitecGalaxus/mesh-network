@@ -1,0 +1,4 @@
+- name: Restart wan_failover
+  ansible.builtin.service:
+    name: wan_failover
+    state: restarted
