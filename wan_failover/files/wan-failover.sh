@@ -130,7 +130,7 @@ run_failover_loop() {
             log_message "Currently using default routes not set by this script" "DEBUG"
         fi
 
-        wan2_gateway=$(ip route show dev eth1 | grep default | head -1 | awk '/default/ {print $3}')
+        wan2_gateway=$(ip route show dev $WAN2_INTERFACE | grep default | head -1 | awk '/default/ {print $3}')
         # Validate that wan2_gateway is a valid IP address
         if ! [[ "$wan2_gateway" =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]]; then
             log_message "Invalid or missing gateway IP for $WAN2_INTERFACE: $wan2_gateway." "INFO"
